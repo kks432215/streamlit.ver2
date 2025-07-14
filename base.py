@@ -1,6 +1,6 @@
 
 import pandas as pd
-import plotly as px
+import plotly.express as px
 
 # -------------------------------
 # 1. 페이지 설정 및 제목
