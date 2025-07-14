@@ -1,11 +1,10 @@
-
+import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# -------------------------------
-# 1. 페이지 설정 및 제목
-# -------------------------------
+# ✅ 꼭 최상단에 위치해야 합니다!
 st.set_page_config(page_title="CO₂ Emissions Dashboard", layout="wide")
+
 st.title("🌍 국가별 CO₂ 배출량 데이터 대시보드")
 st.markdown("Kaggle에서 제공하는 국가별 CO₂ 배출 데이터를 시각화한 대시보드입니다.")
 
