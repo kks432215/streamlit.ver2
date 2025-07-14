@@ -14,7 +14,7 @@ st.markdown("Kaggle에서 제공하는 국가별 CO₂ 배출 데이터를 시�
 # -------------------------------
 @st.cache_data
 def load_data():
-    url = "https://raw.githubusercontent.com/your-username/your-repo/main/co2_emissions.csv"  # ← 여기 수정!
+    url = "https://raw.githubusercontent.com/kks432215/streamlit.ver2/main/co2_emissions.csv"  # ← 경로 수정 완료!
     df = pd.read_csv(url)
     df = df.dropna(subset=["year", "country", "co2"])
     return df
