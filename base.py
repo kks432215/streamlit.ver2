@@ -9,17 +9,15 @@ st.title("🌍 국가별 CO₂ 배출량 데이터 대시보드")
 st.markdown("Kaggle에서 제공하는 국가별 CO₂ 배출 데이터를 시각화한 대시보드입니다.")
 
 # -------------------------------
-# 2. 데이터 불러오기
-# (GitHub의 RAW CSV 링크 사용)
+# 2. 데이터 불러오기 (파일 업로드 방식)
 # -------------------------------
-@st.cache_data
-def load_data():
-    url = "https://raw.githubusercontent.com/kks432215/streamlit.ver2/main/co2_emissions.csv"  # ← 경로 수정 완료!
-    df = pd.read_csv(url)
+uploaded_file = st.sidebar.file_uploader("CSV 파일 업로드", type=["csv"])
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
     df = df.dropna(subset=["year", "country", "co2"])
-    return df
-
-df = load_data()
+else:
+    st.warning("좌측 사이드바에서 co2_emissions.csv 파일을 업로드하세요.")
+    st.stop()
 
 # -------------------------------
 # 3. 필터 설정 (사이드바)
