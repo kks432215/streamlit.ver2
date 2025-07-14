@@ -1,7 +1,3 @@
-import pandas as pd
-
-# 깃허브에 올린 csv의 RAW 링크 사용
-url = "https://raw.githubusercontent.com/사용자명/저장소명/브랜치명/파일명.csv"
-
-df = pd.read_csv(url)
+pandas
 matplotlib
+plotly
