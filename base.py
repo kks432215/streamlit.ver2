@@ -16,15 +16,21 @@ uploaded_file = st.sidebar.file_uploader("CSV 파일 업로드", type=["csv"])
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
-    # 📌 열 이름 확인
-    st.write("열 이름:", df.columns.tolist())
+    # ✅ 열 이름을 모두 소문자로 통일 (대소문자 문제 방지)
+    df.columns = df.columns.str.lower().str.strip()
 
-    # ✅ 소문자로 컬럼 통일 → 예: "year", "country", "co2"
-    df.columns = df.columns.str.strip().str.lower()
+    # ✅ 열 이름 확인 (선택 사항: 제거해도 됨)
+    st.write("📌 실제 열 이름:", df.columns.tolist())
 
-    # ✅ 결측값 제거
+    # ✅ 필수 열이 존재할 때만 처리
+    required_cols = {"year", "country", "co2"}
+    if not required_cols.issubset(set(df.columns)):
+        st.error("❗ CSV 파일에 'year', 'country', 'co2' 열이 존재해야 합니다.")
+        st.stop()
+
+    # ✅ 결측치 제거
     df = df.dropna(subset=["year", "country", "co2"])
-    
+
     # -------------------------------
     # 2. 필터 설정 (사이드바)
     # -------------------------------
@@ -55,7 +61,13 @@ if uploaded_file is not None:
     # -------------------------------
     st.subheader("🏆 특정 연도의 상위 배출국")
     rank_year = st.selectbox("연도 선택", sorted(filtered_df["year"].unique(), reverse=True))
-    rank_df = filtered_df[filtered_df["year"] == rank_year].groupby("country")["co2"].sum().sort_values(ascending=False).head(10)
+    rank_df = (
+        filtered_df[filtered_df["year"] == rank_year]
+        .groupby("country")["co2"]
+        .sum()
+        .sort_values(ascending=False)
+        .head(10)
+    )
     st.bar_chart(rank_df)
 
     # -------------------------------
