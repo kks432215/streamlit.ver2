@@ -12,6 +12,9 @@
 ## 웹 대시보드 바로가기
 👉 [대시보드 실행하기](https://appver2-wyjsrjvkgr7ierbnzjrust.streamlit.app/)
 
+## CSV 다운로드 바로가기
+👉 [csv파일 다운로드](https://www.kaggle.com/datasets/yoannboyere/co2-ghg-emissionsdata)
+
 ## 로컬에서 실행하는 방법
 ```bash
 pip install streamlit pandas plotly
